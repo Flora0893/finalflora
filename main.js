@@ -1,7 +1,8 @@
 function getProjects() {
-  const urlGitHub = "https://github.com/Flora0893?tab=repositories"; // Inserir o nome de usuário do seu github
+  const urlGitHub = "https://api.github.com/users/Flora0893/repos"; // Inserir o nome de usuário do seu github
   const loadingElement = document.getElementById("loading");
   const listElement = document.getElementById("my-projects-list");
+
   fetch(urlGitHub, {
     method: "GET",
   })
@@ -27,19 +28,23 @@ function getProjects() {
         "<p>Erro ao carregar projetos. Tente novamente mais tarde.</p>";
     });
 }
+
 function showProjects(data) {
   const listElement = document.getElementById("my-projects-list");
   data.forEach((repo) => {
     const div = document.createElement("div");
     div.classList.add("project-item"); // Classe para estilização
+
     const a = document.createElement("a");
     a.href = repo["https://github.com/Flora0893?tab=repositories"]; // Link para o repositório no GitHub
     a.target = "_blank";
     a.title = repo["description"] || "Repositório no GitHub";
     a.textContent = repo["name"];
+
     div.appendChild(a);
     listElement.appendChild(div);
   });
 }
+
 // Chamada da função ao carregar o script
 getProjects();
